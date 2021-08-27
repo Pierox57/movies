@@ -11,3 +11,37 @@
     @apply font-poppins;
   }
 }
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-rubik;
+  }
+
+  h1 {
+    @apply text-blue-500;
+    @apply text-center;
+    @apply text-6xl;
+    @apply font-bold;
+    @apply mt-12;
+    @apply mb-24;
+  }
+
+  h2 {
+    @apply text-center;
+    @apply text-4xl;
+    @apply font-bold;
+    @apply mb-6;
+  }
+
+  button {
+    @apply bg-blue-500;
+    @apply text-white;
+    @apply rounded;
+    @apply p-2;
+  }
+}

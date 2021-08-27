@@ -7,4 +7,4 @@ RUN npm run build
 
 FROM nginx:1.21.1
 WORKDIR /app
-COPY --from=frontend-build /app/dist /app/
+COPY --from=frontend-build /app/dist /app/frontend/
