@@ -28,7 +28,7 @@ export default {
     Movie,
   },
   computed: {
-    ...mapState(["movies", "page", "previous", "next"]),
+    ...mapState(["movies", "page", "previous", "next", "error"]),
     ...mapGetters(["getPreviousPage", "getNextPage"]),
   },
   methods: {

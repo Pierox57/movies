@@ -4,7 +4,9 @@ from movies.models import Movie
 from rest_framework import viewsets
 
 
-class MovieViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class MovieViewSet(mixins.ListModelMixin,
+                   mixins.RetrieveModelMixin,
+                   viewsets.GenericViewSet):
     """
     A viewset that provides list actions.
     """

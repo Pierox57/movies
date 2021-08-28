@@ -9,9 +9,21 @@ const routes = [
   },
   {
     path: "/detail/:id",
-    name: "MovieDetail",
+    name: "MoviesDetail",
     component: () =>
-      import(/* webpackChunkName: "detail" */ "../views/MovieDetail.vue"),
+      import(/* webpackChunkName: "detail" */ "../views/MoviesDetail.vue"),
+  },
+  {
+    path: "/edit/:id",
+    name: "MoviesEdit",
+    component: () =>
+      import(/* webpackChunkName: "edit" */ "../views/MoviesEdit.vue"),
+  },
+  {
+    path: "/reviews/add/:id",
+    name: "ReviewsAdd",
+    component: () =>
+      import(/* webpackChunkName: "add" */ "../views/ReviewsAdd.vue"),
   },
 ];
 

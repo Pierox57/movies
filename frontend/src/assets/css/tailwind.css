@@ -20,22 +20,26 @@
   h5,
   h6 {
     @apply font-rubik;
+    @apply font-bold;
   }
 
   h1 {
     @apply text-blue-500;
     @apply text-center;
     @apply text-6xl;
-    @apply font-bold;
     @apply mt-12;
     @apply mb-24;
   }
 
   h2 {
-    @apply text-center;
     @apply text-4xl;
-    @apply font-bold;
+    @apply text-center;
     @apply mb-6;
+  }
+
+  h3 {
+    @apply text-2xl;
+    @apply mb-4;
   }
 
   button {
