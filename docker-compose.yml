@@ -4,11 +4,24 @@ services:
   backend:
     build: ./backend
     restart: always
+    command: celery -A core worker -l DEBUG
     volumes:
       - ./backend:/app
       - static:/app/api/static
+    environment:
+      - SECRET_KEY=6j@u90=)vv8vwl#)yrojys0m&%c0q_ge(+&vw99kkuf+u+8vw7
+      - DEBUG=True
+      - POSTGRES_DB=api
+      - POSTGRES_USER=backend
+      - POSTGRES_PASSWORD=!+kMU7dba3sgBTW8
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
     depends_on:
       - db
+      - redis
+
+  redis:
+    image: redis:6.2.5
 
   nginx:
     restart: on-failure
@@ -34,6 +47,7 @@ services:
       - POSTGRES_PASSWORD=!+kMU7dba3sgBTW8
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+      - ./postgres/init.sql:/var/lib/postgresql/script/init.sql
 
 volumes:
   postgres_data:

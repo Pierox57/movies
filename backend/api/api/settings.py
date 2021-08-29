@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-30c+)3_v-*!#95)xr=6c(jv*pzr)v&*nj1jp!00-3ct!mw8_9g'
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ['DEBUG']
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -81,9 +81,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'HOST': 'db',
-        'NAME': 'api',
-        'USER': 'backend',
-        'PASSWORD': '!+kMU7dba3sgBTW8',
+        'NAME': os.environ["POSTGRES_DB"],
+        'USER': os.environ["POSTGRES_USER"],
+        'PASSWORD': os.environ["POSTGRES_PASSWORD"],
         'PORT': '5432',
     }
 }
@@ -149,13 +149,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # https://github.com/adamchainz/django-cors-headers
 
 CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:8000",
-    "http://127.0.0.1:80",
+    "http://127.0.0.1",
 ]
+
 
 # Django rest framework
 # https://github.com/encode/django-rest-framework/tree/master
+
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 5
 }
+
+
+# Celery
+# https://docs.celeryproject.org/en/stable/
+
+CELERY_BROKER = os.environ["CELERY_BROKER"]
+CELERY_BACKEND = os.environ["CELERY_BACKEND"]

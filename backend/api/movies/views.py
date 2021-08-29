@@ -6,6 +6,7 @@ from movies.models import Movie
 from movies.models import Actor
 from movies.models import Review
 from rest_framework import viewsets
+from movies.tasks import add_review
 
 
 class MovieViewSet(mixins.ListModelMixin,
@@ -37,3 +38,9 @@ class ReviewViewSet(mixins.CreateModelMixin,
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     pagination_class = None
+
+    def perform_create(self, serializer):
+        """
+        Call Celery/Redis task.
+        """
+        add_review()
