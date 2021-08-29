@@ -10,9 +10,7 @@
     @apply text-gray-700;
     @apply font-poppins;
   }
-}
 
-@layer base {
   h1,
   h2,
   h3,
@@ -47,5 +45,14 @@
     @apply text-white;
     @apply rounded;
     @apply p-2;
+  }
+
+  input,
+  textarea,
+  select {
+    @apply bg-gray-100;
+    @apply rounded;
+    @apply p-2;
+    @apply mb-4;
   }
 }

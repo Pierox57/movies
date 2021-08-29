@@ -15,7 +15,6 @@
           type="text"
           name="title"
           placeholder="Title"
-          class="bg-gray-100 rounded p-2 mb-4"
           v-model="movie.title"
         />
         <textarea
@@ -23,25 +22,15 @@
           placeholder="Description"
           cols="30"
           rows="10"
-          class="bg-gray-100 rounded p-2 mb-4"
           v-model="movie.description"
         >
         </textarea>
-        <select
-          multiple
-          class="bg-gray-100 rounded p-2 mb-4"
-          v-model="movie.actors"
-        >
+        <select multiple v-model="movie.actors">
           <option v-for="actor in actors" :key="actor" :value="actor">
             {{ actor.first_name }} {{ actor.last_name }}
           </option>
         </select>
-        <button
-          @click="setMovie"
-          class="text-white bg-blue-500 my-2 p-2 rounded"
-        >
-          update
-        </button>
+        <button @click="setMovie" class="my-2">Update</button>
       </form>
     </div>
   </div>
@@ -63,16 +52,18 @@ export default {
   methods: {
     ...mapActions(["getMovie", "getActors", "updateMovie"]),
     setMovie() {
-      this.updateMovie(this.movie)
-        .then(() => {
-          this.$router.push({
-            name: "MoviesDetail",
-            params: { id: this.movie.id },
+      if (!this.form_errors.length) {
+        this.updateMovie(this.movie)
+          .then(() => {
+            this.$router.push({
+              name: "MoviesDetail",
+              params: { id: this.movie.id },
+            });
+          })
+          .catch(() => {
+            console.error(this.error);
           });
-        })
-        .catch(() => {
-          console.error(this.error);
-        });
+      }
     },
     checkForm(element) {
       if (this.title && this.description) {

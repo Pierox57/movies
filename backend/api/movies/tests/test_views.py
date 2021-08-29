@@ -95,3 +95,27 @@ class ActorsViewsTests(APITestCase):
             [("id", self.actor.pk),
              ("first_name", self.actor.first_name),
              ("last_name", self.actor.last_name)])])
+
+
+class ReviewsViewsTests(APITestCase):
+    """
+    Test reviews views.
+    """
+
+    def setUp(self):
+        self.movie = Movie.objects.create(
+            title="Kill Bill", description="Fight movie")
+
+    def test_create_review(self):
+        """
+        Ensure we can create a review.
+        """
+        data = {
+            "grade": 5,
+            "movie": self.movie.pk,
+        }
+        url = reverse('review-list')
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data["grade"], 5)
+        self.assertEqual(response.data["movie"], self.movie.pk)

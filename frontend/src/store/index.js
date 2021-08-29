@@ -1,7 +1,7 @@
 import { createStore } from "vuex";
 import axios from "axios";
 
-var base_url = "http://127.0.0.1:8080";
+const base_url = "http://127.0.0.1:8080";
 
 export default createStore({
   state: {
@@ -25,7 +25,7 @@ export default createStore({
       state.movie.reviews.forEach((review) => {
         sum += review.grade;
       });
-      return sum / state.movie.reviews.length;
+      return (sum / state.movie.reviews.length).toFixed(1);
     },
   },
   mutations: {
@@ -112,6 +112,20 @@ export default createStore({
           },
         });
         commit("SET_ACTORS", response.data);
+      } catch (error) {
+        commit("SET_ERROR", error);
+        throw error;
+      }
+    },
+    async createReview({ commit }, review) {
+      try {
+        await axios.post(base_url + "/reviews/", {
+          grade: review.grade,
+          movie: review.movie,
+          params: {
+            format: "json",
+          },
+        });
       } catch (error) {
         commit("SET_ERROR", error);
         throw error;
