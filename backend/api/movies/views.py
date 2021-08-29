@@ -44,3 +44,4 @@ class ReviewViewSet(mixins.CreateModelMixin,
         Call Celery/Redis task.
         """
         add_review()
+        serializer.save()

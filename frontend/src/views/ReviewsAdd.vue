@@ -43,22 +43,20 @@ export default {
   methods: {
     ...mapActions(["getMovie", "createReview"]),
     setReview() {
-      if (!this.form_errors.length) {
-        const review = {
-          grade: this.grade,
-          movie: this.movie.id,
-        };
-        this.createReview(review)
-          .then(() => {
-            this.$router.push({
-              name: "MoviesDetail",
-              params: { id: this.movie.id },
-            });
-          })
-          .catch(() => {
-            console.error(this.error);
+      const review = {
+        grade: this.grade,
+        movie: this.movie.id,
+      };
+      this.createReview(review)
+        .then(() => {
+          this.$router.push({
+            name: "MoviesDetail",
+            params: { id: this.movie.id },
           });
-      }
+        })
+        .catch(() => {
+          console.error(this.error);
+        });
     },
     checkForm(element) {
       if (this.grade >= 5 && this.grade <= 1) {
