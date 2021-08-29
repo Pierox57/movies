@@ -2,7 +2,22 @@
   <div class="movies-detail">
     <div class="flex justify-center">
       <h2 class="flex-initial">{{ movie.title }}</h2>
-      <router-link :to="{ name: 'MoviesEdit', params: { id: this.$route.params.id } }" class="flex-initial inline-block bg-blue-500 text-white rounded p-1 mx-2 mb-8 mt-1">Edit</router-link>
+      <router-link
+        :to="{ name: 'MoviesUpdate', params: { id: this.$route.params.id } }"
+        class="
+          flex-initial
+          inline-block
+          bg-blue-500
+          text-white
+          rounded
+          p-1
+          mx-2
+          mb-8
+          mt-1
+        "
+      >
+        Update
+      </router-link>
     </div>
     <div class="container mx-auto w-1/2">
       <h3>Description</h3>
@@ -15,7 +30,22 @@
       </ul>
       <div class="flex">
         <h3 class="flex-initial">Grade</h3>
-        <router-link :to="{ name: 'ReviewsAdd', params: { id: this.$route.params.id } }" class="flex-initial inline-block bg-blue-500 text-white rounded px-1 mx-2 mb-6 mt-1">Add</router-link>
+        <router-link
+          :to="{ name: 'ReviewsAdd', params: { id: this.$route.params.id } }"
+          class="
+            flex-initial
+            inline-block
+            bg-blue-500
+            text-white
+            rounded
+            px-1
+            mx-2
+            mb-6
+            mt-1
+          "
+        >
+          Add
+        </router-link>
       </div>
       <p>{{ average }} / 5</p>
     </div>

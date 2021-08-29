@@ -17,8 +17,8 @@ class MoviesViewsTests(APITestCase):
             first_name="Uma", last_name="Thurman")
         self.movie = Movie.objects.create(
             title="Kill Bill", description="Fight movie")
-        Movie.objects.create(title="Kill Bill 2",
-                             description="Fight movie")
+        self.movie_2 = Movie.objects.create(title="Kill Bill 2",
+                                            description="Fight movie")
         Movie.objects.create(title="Lord of the ring 1",
                              description="Aventure")
         Movie.objects.create(title="Lord of the ring 2",
@@ -55,3 +55,43 @@ class MoviesViewsTests(APITestCase):
             [("id", self.review.pk),
              ("grade", self.review.grade),
              ("movie", self.movie.pk)])])
+
+    def test_update_movie(self):
+        """
+        Ensure we can update a movie.
+        """
+        data = {
+            "title": "Requiem for a dream",
+            "description": "Addictions",
+            "actors": [],
+            "reviews": []
+        }
+        url = reverse('movie-detail', args=[self.movie_2.pk])
+        response = self.client.put(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["title"], "Requiem for a dream")
+        self.assertEqual(response.data["description"], "Addictions")
+        self.assertEqual(response.data["actors"], [])
+        self.assertEqual(response.data["reviews"], [])
+
+
+class ActorsViewsTests(APITestCase):
+    """
+    Test actors views.
+    """
+
+    def setUp(self):
+        self.actor = Actor.objects.create(
+            first_name="Uma", last_name="Thurman")
+
+    def test_get_actors(self):
+        """
+        Ensure we can get actors list.
+        """
+        url = reverse('actor-list')
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, [OrderedDict(
+            [("id", self.actor.pk),
+             ("first_name", self.actor.first_name),
+             ("last_name", self.actor.last_name)])])

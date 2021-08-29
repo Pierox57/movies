@@ -7,6 +7,7 @@ export default createStore({
   state: {
     movies: [],
     movie: [],
+    actors: [],
     page: 1,
     previous: false,
     next: false,
@@ -33,6 +34,9 @@ export default createStore({
     },
     SET_MOVIE(state, movie) {
       state.movie = movie;
+    },
+    SET_ACTORS(state, actors) {
+      state.actors = actors;
     },
     SET_PAGE(state, page) {
       state.page = page;
@@ -75,6 +79,39 @@ export default createStore({
           },
         });
         commit("SET_MOVIE", response.data);
+      } catch (error) {
+        commit("SET_ERROR", error);
+        throw error;
+      }
+    },
+    async updateMovie({ commit }, movie) {
+      try {
+        const response = await axios.put(
+          base_url + "/movies/" + movie.id + "/",
+          {
+            title: movie.title,
+            description: movie.description,
+            actors: movie.actors,
+            reviews: movie.reviews,
+            params: {
+              format: "json",
+            },
+          }
+        );
+        commit("SET_MOVIE", response.data);
+      } catch (error) {
+        commit("SET_ERROR", error);
+        throw error;
+      }
+    },
+    async getActors({ commit }) {
+      try {
+        const response = await axios.get(base_url + "/actors/", {
+          params: {
+            format: "json",
+          },
+        });
+        commit("SET_ACTORS", response.data);
       } catch (error) {
         commit("SET_ERROR", error);
         throw error;
