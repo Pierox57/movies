@@ -8,14 +8,7 @@ services:
     volumes:
       - ./backend:/app
       - static:/app/api/static
-    environment:
-      - SECRET_KEY=6j@u90=)vv8vwl#)yrojys0m&%c0q_ge(+&vw99kkuf+u+8vw7
-      - DEBUG=True
-      - POSTGRES_DB=api
-      - POSTGRES_USER=backend
-      - POSTGRES_PASSWORD=!+kMU7dba3sgBTW8
-      - CELERY_BROKER=redis://redis:6379/0
-      - CELERY_BACKEND=redis://redis:6379/0
+    env_file: ./backend/.env
     depends_on:
       - db
       - redis
@@ -41,10 +34,7 @@ services:
   db:
     restart: always
     image: postgres:13.4
-    environment:
-      - POSTGRES_DB=api
-      - POSTGRES_USER=backend
-      - POSTGRES_PASSWORD=!+kMU7dba3sgBTW8
+    env_file: ./postgres/.env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
       - ./postgres/init.sql:/var/lib/postgresql/script/init.sql

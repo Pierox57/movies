@@ -1,0 +1,109 @@
+[
+    {
+        "model": "movies.actor",
+        "pk": 1,
+        "fields": {
+            "first_name": "Uma",
+            "last_name": "Thurman"
+        }
+    },
+    {
+        "model": "movies.actor",
+        "pk": 2,
+        "fields": {
+            "first_name": "Leonardo",
+            "last_name": "Dicaprio"
+        }
+    },
+    {
+        "model": "movies.actor",
+        "pk": 3,
+        "fields": {
+            "first_name": "Brad",
+            "last_name": "Pitt"
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 1,
+        "fields": {
+            "title": "Kill Bill 1",
+            "description": "Action movie.",
+            "actors": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 2,
+        "fields": {
+            "title": "Kill Bill 2",
+            "description": "Action movie.",
+            "actors": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 3,
+        "fields": {
+            "title": "Kill Bill 3",
+            "description": "Action movie.",
+            "actors": []
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 4,
+        "fields": {
+            "title": "The lord of the rings 1",
+            "description": "Aventure movie.",
+            "actors": []
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 5,
+        "fields": {
+            "title": "The lord of the rings 2",
+            "description": "Aventure movie.",
+            "actors": []
+        }
+    },
+    {
+        "model": "movies.movie",
+        "pk": 6,
+        "fields": {
+            "title": "The lord of the rings 3",
+            "description": "Aventure movie.",
+            "actors": []
+        }
+    },
+    {
+        "model": "movies.review",
+        "pk": 1,
+        "fields": {
+            "grade": 5,
+            "movie": 1
+        }
+    },
+    {
+        "model": "movies.review",
+        "pk": 2,
+        "fields": {
+            "grade": 4,
+            "movie": 2
+        }
+    },
+    {
+        "model": "movies.review",
+        "pk": 3,
+        "fields": {
+            "grade": 5,
+            "movie": 2
+        }
+    }
+]
